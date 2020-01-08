@@ -20,5 +20,4 @@ phases:
   post_build:
     commands:
     - echo Build completed on `date`
-    - echo Pushing the Docker image...
     - docker push ${SM_ALPHA}.dkr.ecr.us-west-2.amazonaws.com/sm-xgb-codebuild-test:${SM_XGB_VERSION}-cpu-py3

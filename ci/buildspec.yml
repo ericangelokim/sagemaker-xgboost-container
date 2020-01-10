@@ -13,11 +13,8 @@ phases:
     commands:
     - echo Build started on `date`
     - echo Building the Docker image...
-    - docker build -t xgboost-container-base:${SM_XGB_VERSION}-cpu-py3 -f docker/${SM_XGB_VERSION}/base/Dockerfile.cpu .
-    - python setup.py bdist_wheel --universal
-    - docker build -t preprod-xgboost-container:${SM_XGB_VERSION}-cpu-py3 -f docker/${SM_XGB_VERSION}/final/Dockerfile.cpu .
-    - docker tag preprod-xgboost-container:${SM_XGB_VERSION}-cpu-py3 ${SM_ALPHA}.dkr.ecr.us-west-2.amazonaws.com/sm-xgb-codebuild-test:${SM_XGB_VERSION}-cpu-py3
+    - ${BUILD_COMMAND_LIST}
   post_build:
     commands:
     - echo Build completed on `date`
-    - docker push ${SM_ALPHA}.dkr.ecr.us-west-2.amazonaws.com/sm-xgb-codebuild-test:${SM_XGB_VERSION}-cpu-py3
+    - ${POST_BUILD_COMMAND_LIST}
